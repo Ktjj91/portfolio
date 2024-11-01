@@ -28,7 +28,7 @@ export default function Services() {
     return (
         <section>
             <h3 className="text-4xl text-center" id="services">Services</h3>
-            <div className="grid md:grid-cols-1 md:mt-4 lg:grid-col-2 gap-2 mt-3 justify-center	justify-items-center	">
+            <div className="grid md:grid-cols-1 md:mt-4 lg:grid-cols-2 gap-2 mt-3 justify-center justify-items-center">
                 {
                     services.map((service) => (
                         <Card key={service.nameService}>
