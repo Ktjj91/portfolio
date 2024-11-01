@@ -1,6 +1,6 @@
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import Image from "next/image";
-import Petitepattestyle from "@/assets/images/Capture d’écran 2024-11-01 à 12.29.28.png"
+import Petitepattestyle from "@/assets/images/me.png"
 import {Badge} from "@/components/ui/badge";
 
 export default function Projects() {
