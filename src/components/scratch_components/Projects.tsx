@@ -10,7 +10,7 @@ export default function Projects() {
             name:"Petitepattestyle",
             image:Petitepattestyle,
             description:"An e-commerce site for small dogs",
-            tags:["Next.js","Docker","Google Cloud Platform","Stripe","Resend"],
+            tags:["Next.js","Docker","GCP","Stripe","Resend"],
             isOn:true
         }
     ]
@@ -20,8 +20,7 @@ export default function Projects() {
             <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-2 mt-3 ">
                 {
                     projects.map((project) => (
-
-                        <Card  key={project.name}>
+                        <Card className="w-[300px]"  key={project.name}>
                             <CardHeader>
                                 <Image className="text-center" src={project.image} alt={`Photo of ${project.name}`}  />
                                 <CardTitle >{project.name}</CardTitle>
@@ -33,7 +32,7 @@ export default function Projects() {
                                 </CardContent> : ""
                             }
 
-                            <CardFooter className="space-x-2 ">
+                            <CardFooter className="gap-2 flex-wrap ">
                                 {
                                     project.tags.map(tag => (
                                         <Badge  key={tag}>{tag}</Badge>
