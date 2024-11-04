@@ -19,7 +19,7 @@ export default function Home() {
             <Contact />
         </main>
         <Footer />
-        <Link href="/">
+        <Link href="/public">
             <FaArrowAltCircleUp className="text-6xl fixed right-5 bottom-5 z-50" />
         </Link>
     </div>

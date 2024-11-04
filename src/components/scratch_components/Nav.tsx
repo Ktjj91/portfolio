@@ -1,12 +1,27 @@
-"use client"
-import { useState } from 'react';
+"use client";
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu } from 'lucide-react';
+import { useChangeLocale, useI18n } from "@/app/locales/client";
 
 export default function Nav() {
     const [isOpen, setIsOpen] = useState(false);
+    const [changeToLocale, setChangeToLocale] = useState(false);
+    const t = useI18n();
+    const changeLocale = useChangeLocale();
 
-    const handleSmoothScroll = (id:string) => {
+    const fr = "fr".split('').map(letter => letter.charCodeAt(0) % 32 + 0x1F1E5).map(n => String.fromCodePoint(n)).join('');
+    const en = "us".split('').map(letter => letter.charCodeAt(0) % 32 + 0x1F1E5).map(n => String.fromCodePoint(n)).join('');
+
+    useEffect(() => {
+        const storedLocale = localStorage.getItem('locale');
+        if (storedLocale) {
+            setChangeToLocale(storedLocale === 'fr');
+            changeLocale(storedLocale as 'en' | 'fr');
+        }
+    }, [changeLocale]);
+
+    const handleSmoothScroll = (id: string) => {
         const element = document.getElementById(id);
         if (element) {
             const topPosition = element.getBoundingClientRect().top + window.scrollY;
@@ -14,28 +29,33 @@ export default function Nav() {
                 top: topPosition,
                 behavior: "smooth",
             });
-
-            setIsOpen(false); // Ferme le menu après le clic
+            setIsOpen(false);
         }
     };
 
     const links = [
-        { name: 'Home', id: 'home' },
-        { name: 'About Me', id: 'about' },
-        { name: 'Services', id: 'services' },
-        { name: 'Projects', id: 'projects' },
-        { name: 'Contact Us', id: 'contact' },
+        { name: t('Home'), id: 'home' },
+        { name: t('AboutMe'), id: 'about' },
+        { name: t('Services'), id: 'services' },
+        { name: t('Project'), id: 'projects' },
+        { name: t('ContactUs'), id: 'contact' },
     ];
+
+    const handleChangeLocale = () => {
+        const newLocale = changeToLocale ? 'en' : 'fr'; // Toggle the locale
+        setChangeToLocale(!changeToLocale); // Toggle state
+        changeLocale(newLocale); // Update the locale
+        localStorage.setItem('locale', newLocale); // Store in localStorage
+        console.log(`Locale changed to: ${newLocale}`); // Debugging message
+    };
 
     return (
         <nav className="p-3 bg-green-600 text-white flex items-center justify-between lg:grid lg:grid-cols-3">
-            {/* Section du logo */}
             <div>
                 <p className="text-2xl font-bold tracking-widest">Kingsley</p>
                 <p><small className="italic">Developer fullstack</small></p>
             </div>
 
-            {/* Liens pour la version bureau */}
             <ul className="hidden md:flex space-x-4 flex-row justify-center">
                 {links.map((link) => (
                     <li key={link.id}>
@@ -50,9 +70,9 @@ export default function Nav() {
             </ul>
 
             <div className="hidden md:block justify-self-end">
-                <Button variant="secondary" onClick={() => handleSmoothScroll("contact")}>
-                    Contact Us
-                </Button>
+                <button className="text-3xl cursor-pointer transition-transform duration-300 transform hover:scale-110 " onClick={handleChangeLocale}>
+                    {changeToLocale ? fr : en}
+                </button>
             </div>
 
             <Button variant="ghost" size="icon" className="md:hidden ml-auto" onClick={() => setIsOpen(true)}>
@@ -60,7 +80,6 @@ export default function Nav() {
                 <span className="sr-only">Toggle menu</span>
             </Button>
 
-            {/* Menu latéral */}
             <div className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                 <div className={`fixed right-0 top-0 w-64 h-full bg-white p-4 transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform`}>
                     <button onClick={() => setIsOpen(false)} className="text-gray-600 hover:text-black font-bold">

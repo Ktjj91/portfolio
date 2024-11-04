@@ -2,21 +2,25 @@ import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} f
 import Image from "next/image";
 import Petitepattestyle from "@/assets/images/me.png"
 import {Badge} from "@/components/ui/badge";
+import  {getScopedI18n,getI18n} from "@/app/locales/server";
 
-export default function Projects() {
+export default  async function Projects() {
+
+    const scoppedTProjects = await getScopedI18n('Projects');
+    const t  = await  getI18n();
 
     const projects = [
         {
-            name:"Petitepattestyle",
+            name:scoppedTProjects('name'),
             image:Petitepattestyle,
-            description:"An e-commerce site for small dogs",
+            description:scoppedTProjects('description'),
             tags:["Next.js","Docker","GCP","Stripe","Resend"],
             isOn:true
         }
     ]
     return (
         <section className="text-4xl mt-2">
-            <h1 className="text-center" id="projects">Projects</h1>
+            <h1 className="text-center" id="projects">{t('Project')}</h1>
             <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-2 mt-3 ">
                 {
                     projects.map((project) => (
