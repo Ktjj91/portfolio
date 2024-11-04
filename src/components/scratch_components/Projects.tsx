@@ -21,7 +21,7 @@ export default  async function Projects() {
     return (
         <section className="text-4xl mt-2">
             <h1 className="text-center" id="projects">{t('Project')}</h1>
-            <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-2 mt-3 ">
+            <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-2 mt-3 justify-center	 ">
                 {
                     projects.map((project) => (
                         <Card className="w-[300px]"  key={project.name}>

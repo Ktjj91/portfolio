@@ -4,7 +4,6 @@ import  {getScopedI18n} from "@/app/locales/server";
 
 export default  async function Services() {
 
-    // const t = await getI18n();
     const scopedTServiceFullStack = await getScopedI18n("serviceFullstackDeveloper");
     const scopedTServiceEcom = await getScopedI18n("serviceEcom");
     const scopedTServicePerf = await (getScopedI18n('servicePerf'));
