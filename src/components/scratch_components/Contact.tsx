@@ -22,7 +22,7 @@ export default  async function Contact() {
                 <a className={stylesHoverLink} href="https://github.com/Ktjj91">
                     <FaGithub/>
                 </a>
-                <p> <a className="underline hover:text-blue-500" href="mailto:kingsley.dev@gmail.com">kingsley.dev@gmail.com</a></p>
+                <p> <a className="underline hover:text-blue-500" href="mailto:kingsley.thomas.dev@gmail.com">kingsley.thomas.dev@gmail.com</a></p>
             </div>
         </section>
     )
